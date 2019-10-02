@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+    <TextView
+            android:id="@+id/lbName1"
+            android:text="@string/lbName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <EditText
+            android:id="@+id/etName"
+            android:layout_below="@id/lbName1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Name"/>
+    <TextView
+            android:id="@+id/lbPhone1"
+            android:text="@string/lbPhone"
+            android:layout_below="@id/etName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <EditText
+            android:id="@+id/etPhone"
+            android:layout_below="@id/lbPhone1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="Phone"/>
+</RelativeLayout>

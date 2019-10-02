@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ViewMobelTest</string>
+    <string name="lbName">Name</string>
+    <string name="lbPhone">Phone</string>
+</resources>
