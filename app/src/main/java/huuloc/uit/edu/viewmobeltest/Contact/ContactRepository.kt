@@ -21,6 +21,14 @@ class ContactRepository(application: Application) {
         return contactDAO?.getAllFavoriteContact()
     }
 
+    fun findContact(key: String): LiveData<List<Contact>>? {
+        return contactDAO?.findContact(key)
+    }
+
+    fun findContactFavorite(key: String): LiveData<List<Contact>>? {
+        return contactDAO?.findContactFavorite(key)
+    }
+
     fun remove(contact: Contact) {
         AsyncTaskProcessDelete(contactDAO).execute(contact)
     }
@@ -34,21 +42,24 @@ class ContactRepository(application: Application) {
     }
 
 
-    private class AsyncTaskProcessInsert internal constructor(val dao: ContactDAO?) : AsyncTask<Contact, Void, Void>() {
+    private class AsyncTaskProcessInsert internal constructor(val dao: ContactDAO?) :
+        AsyncTask<Contact, Void, Void>() {
         override fun doInBackground(vararg contact: Contact): Void? {
             dao?.insert(*(contact.toMutableList()).toTypedArray())
             return null
         }
     }
 
-    private class AsyncTaskProcessDelete internal constructor(val dao: ContactDAO?) : AsyncTask<Contact, Void, Void>() {
+    private class AsyncTaskProcessDelete internal constructor(val dao: ContactDAO?) :
+        AsyncTask<Contact, Void, Void>() {
         override fun doInBackground(vararg contact: Contact): Void? {
             dao?.remove(contact[0])
             return null
         }
     }
 
-    private class AsyncTaskProcessUpdate internal constructor(val dao: ContactDAO?) : AsyncTask<Contact, Void, Void>() {
+    private class AsyncTaskProcessUpdate internal constructor(val dao: ContactDAO?) :
+        AsyncTask<Contact, Void, Void>() {
         override fun doInBackground(vararg contact: Contact): Void? {
             dao?.update(contact[0])
             return null

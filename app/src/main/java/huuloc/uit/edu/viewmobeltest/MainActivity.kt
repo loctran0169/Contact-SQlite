@@ -1,12 +1,14 @@
 package huuloc.uit.edu.viewmobeltest
 
 import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProviders
 import huuloc.uit.edu.viewmobeltest.Contact.Contact
 import huuloc.uit.edu.viewmobeltest.Contact.ContactRepository
 import huuloc.uit.edu.viewmobeltest.Fragment.MyFragmentAdapter
@@ -16,6 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     val repo: ContactRepository by lazy {
         ContactRepository(application)
+    }
+    val viewModel: MainViewModel by lazy {
+        ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
     lateinit var name: EditText
     lateinit var phone: EditText
@@ -45,12 +50,23 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                         repo.insert(contact)
-                    }
-                    else Toast.makeText(this,"Please fill full",Toast.LENGTH_SHORT).show()
+                    } else Toast.makeText(this, "Please fill full", Toast.LENGTH_SHORT).show()
                 }
             var dislay = dialog.create()
             dislay.setTitle("Add Contact")
             dislay.show()
         }
+
+        search_view.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.query.apply { value = newText ?: "" }
+                return true
+            }
+        })
     }
 }
