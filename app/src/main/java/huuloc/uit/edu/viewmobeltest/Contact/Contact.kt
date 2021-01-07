@@ -10,7 +10,7 @@ class Contact(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String = UUID.randomUUID().toString(),
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "name", collate = ColumnInfo.NOCASE)
     val name: String,
     @ColumnInfo(name = "phone")
     val phone: String,
